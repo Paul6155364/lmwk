@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bootdo.usermanage.dao.ApplyuserDao">
+  <resultMap id="BaseResultMap" type="com.bootdo.usermanage.domain.Applyuser">
+    <id column="applyuser_uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="applyuser_id" jdbcType="VARCHAR" property="id" />
+    <result column="applyuser_telphone" jdbcType="VARCHAR" property="telphone" />
+    <result column="applyuser_password" jdbcType="VARCHAR" property="password" />
+    <result column="applyuser_staus" jdbcType="VARCHAR" property="staus" />
+    <result column="applyuser_nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="applyuser_create_time" jdbcType="BIGINT" property="createTime" />
+    <result column="applyuser_apply_time" jdbcType="BIGINT" property="applyTime" />
+    <result column="applyuser_lock_time" jdbcType="BIGINT" property="lockTime" />
+    <result column="applyuser_company_id" jdbcType="VARCHAR" property="companyId" />
+    <result column="applyuser_apply_code" jdbcType="VARCHAR" property="applyCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    applyuser.uuid as applyuser_uuid, applyuser.id as applyuser_id, applyuser.telphone as applyuser_telphone, 
+    applyuser.password as applyuser_password, applyuser.staus as applyuser_staus, applyuser.nick_name as applyuser_nick_name, 
+    applyuser.create_time as applyuser_create_time, applyuser.apply_time as applyuser_apply_time, 
+    applyuser.lock_time as applyuser_lock_time, applyuser.company_id as applyuser_company_id, 
+    applyuser.apply_code as applyuser_apply_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from applyuser applyuser
+    where applyuser.uuid = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from applyuser
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bootdo.usermanage.domain.Applyuser">
+    <selectKey keyProperty="uuid" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applyuser (id, telphone, password, 
+      staus, nick_name, create_time, 
+      apply_time, lock_time, company_id, 
+      apply_code)
+    values (#{id,jdbcType=VARCHAR}, #{telphone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{staus,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}, 
+      #{applyTime,jdbcType=BIGINT}, #{lockTime,jdbcType=BIGINT}, #{companyId,jdbcType=VARCHAR}, 
+      #{applyCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bootdo.usermanage.domain.Applyuser">
+    <selectKey keyProperty="uuid" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applyuser
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="telphone != null">
+        telphone,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="staus != null">
+        staus,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="applyTime != null">
+        apply_time,
+      </if>
+      <if test="lockTime != null">
+        lock_time,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="applyCode != null">
+        apply_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null">
+        #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="staus != null">
+        #{staus,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="applyTime != null">
+        #{applyTime,jdbcType=BIGINT},
+      </if>
+      <if test="lockTime != null">
+        #{lockTime,jdbcType=BIGINT},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="applyCode != null">
+        #{applyCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bootdo.usermanage.domain.Applyuser">
+    update applyuser
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null">
+        telphone = #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="staus != null">
+        staus = #{staus,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="applyTime != null">
+        apply_time = #{applyTime,jdbcType=BIGINT},
+      </if>
+      <if test="lockTime != null">
+        lock_time = #{lockTime,jdbcType=BIGINT},
+      </if>
+      <if test="companyId != null">
+        company_id = #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="applyCode != null">
+        apply_code = #{applyCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bootdo.usermanage.domain.Applyuser">
+    update applyuser
+    set id = #{id,jdbcType=VARCHAR},
+      telphone = #{telphone,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      staus = #{staus,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT},
+      apply_time = #{applyTime,jdbcType=BIGINT},
+      lock_time = #{lockTime,jdbcType=BIGINT},
+      company_id = #{companyId,jdbcType=VARCHAR},
+      apply_code = #{applyCode,jdbcType=VARCHAR}
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <select id="list" parameterType="map" resultType="com.bootdo.usermanage.domain.Applyuser">
+    select * from applyuser
+    <choose>
+      <when test="sort != null and sort.trim() != ''">
+        order by ${sort} ${order}
+      </when>
+      <otherwise>
+        order by uuid desc
+      </otherwise>
+    </choose>
+    <if test="offset != null and limit != null">
+      limit #{offset}, #{limit}
+    </if>
+  </select>
+  <select id="count" resultType="int">
+    select count(*) from applyuser
+  </select>
+</mapper>
